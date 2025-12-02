@@ -1,4 +1,5 @@
 /dataset
 *.json
 *.csv
+*.ipynb
 .DS_Store

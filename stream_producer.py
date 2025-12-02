@@ -31,12 +31,11 @@ for i in range(0, len(order_ids), batch_size):
     batch_payments = payments[payments["order_id"].isin(batch_order_ids)]
     batch_reviews = reviews[reviews["order_id"].isin(batch_order_ids)]
     
-    # Convert to CSV string
+    # Convert to JSON string
     json_orders = batch_orders.to_json(orient="records")
     json_items = batch_items.to_json(orient="records")
     json_payments = batch_payments.to_json(orient="records")
     json_reviews = batch_reviews.to_json(orient="records")
-    print(json_orders)
 
     producer.produce('orders',key=f'batch_{i//batch_size +1}',value=json_orders)
     producer.produce('order_items',key=f'batch_{i//batch_size +1}',value=json_items)
